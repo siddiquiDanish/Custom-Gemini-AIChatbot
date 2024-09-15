@@ -1,13 +1,13 @@
 import streamlit as st
 import os
-# from dotenv import load_dotenv, find_dotenv
+from dotenv import load_dotenv, find_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from streamlit_chat import message
 from langchain.schema import (HumanMessage, SystemMessage, AIMessage)
 
-# load_dotenv(find_dotenv(), override=True)
+load_dotenv(find_dotenv(), override=True)
 
-# llm_model = ChatGoogleGenerativeAI(model='gemini-pro', temprature=0.5, convert_system_message_to_human=True)
+llm_model = ChatGoogleGenerativeAI(model='gemini-pro', temprature=0.5, convert_system_message_to_human=True)
 st.set_page_config(
     page_title='AI Chatbox',
     page_icon='🤖'
@@ -18,12 +18,12 @@ if 'messages' not in st.session_state:
     st.session_state.messages = []
 
 with st.sidebar:
-    api_key = st.text_input('Your Gemini Api Key : ', type='password')
-    if api_key:
-        os.environ['GOOGLE_API_KEY'] = api_key
+    # api_key = st.text_input('Your Gemini Api Key : ', type='password')
+    # if api_key:
+    #     os.environ['GOOGLE_API_KEY'] = api_key
     system_message = st.text_input(label='System role :')
     user_prompt = st.text_input(label='Send a message :')
-    llm_model = ChatGoogleGenerativeAI(model='gemini-pro', temprature=0.5, convert_system_message_to_human=True)
+    # llm_model = ChatGoogleGenerativeAI(model='gemini-pro', temprature=0.5, convert_system_message_to_human=True)
     if system_message:
         if not any(isinstance(x, SystemMessage) for x in st.session_state.messages):
             st.session_state.messages.append(SystemMessage(content=system_message))
